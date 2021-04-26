@@ -1,0 +1,78 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="myForm">
+	<div class="tabset">
+		<!-- Tab 1 -->
+		<input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
+		<label for="tab1">New Call Log</label>
+		<!-- Tab 2 -->
+		<input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+		<label for="tab2">Search Call Logs</label>
+
+		<div class="tab-panels">
+			<section id="marzen" class="tab-panel">
+       
+       <div>
+                  <div>
+          Status:      
+          <select formControlName="status" placeholder="Status*">
+	<option [value]="choice" *ngFor="let choice of statusChoices">{{ choice }}</option>
+		</select>
+            </div>
+            <br>
+ 
+				<div>
+					Name:<input type ="text" placeholder="Enter Name" formControlName="name" />
+        </div>
+
+            </div>
+
+        	<div>
+					Titile:<input type ="text" placeholder="Enter Title" formControlName="title" />
+        </div>
+        	<div>
+					Problem:<input type ="textarea" placeholder="Enter Problem" formControlName="problem" />
+        </div>
+        	<div>
+					Solution:<input type ="textarea" placeholder="Enter Solution" formControlName="solution" />
+        </div>
+        
+        <div>
+          <input type="submit" value="Submit" >
+          </div>
+        
+			</section>
+			<section id="rauchbier" class="tab-panel">
+				<div>
+					<input type ="text" placeholder="search" [(ngModel)]="searchText"  formControlName="searchCL" />
+        </div>
+        <div>
+            <table  class="table table-striped" >
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+      
+        <th>Title</th>
+        <th>Problem</th>
+        <th>Solution</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+     <tr *ngFor="let cl of searchCallLogs | filter:searchText">
+        <td>{{cl.date}}</td>
+        <td>{{cl.name}}</td>
+        <td>{{cl.title}}</td>
+        <td>{{cl.problem}}</td>
+        <td>{{cl.solution}}</td>
+        <td>{{cl.status}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+        </div>
+			</section>
+
+		</div>
+
+	</div>
+</form>
